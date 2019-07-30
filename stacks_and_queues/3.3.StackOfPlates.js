@@ -99,6 +99,8 @@ class Stack {
     pop() {
         if(!this.top) return null;
         
+        let val = this.top.val;
+        
         if (this.top === this.bottom) {
             this.bottom = null;
         } 
