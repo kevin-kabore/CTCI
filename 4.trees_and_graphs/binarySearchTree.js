@@ -7,6 +7,12 @@
  *  - Search/Find/Contains: Avg/Best: O(logn) // increases by 1 step every double n
  *      - worst case: O(n) every node is on the right (greater).
  * 
+ *  - Tree Traversal / Search
+ *      - Depth First Search: All children, before siblings (depth first)
+ *          - inOrder traversal: left, node, right (lowest, middle, highest)
+ *          - preOrder traversal: node, left, right (middle, lowest, highest)
+ *          - postOrder traversal: right, node, left (highest, middle, lowest)
+ * 
  */
 
 
@@ -91,7 +97,54 @@ class BinarySearchTree {
         if(!found) return false;
 
         return current;
+    }
 
+    DFSInOrder() { // ascending: left, middle, right
+        if(!this.root) return [];
+
+        let data = [],
+            current = this.root;
+
+        function traverseInOrder(node, arr) {
+            if(node.left) traverseInOrder(node.left, arr);
+            arr.push(node.val);
+            if(node.right) traverseInOrder(node.right, arr);
+        }
+
+        traverseInOrder(this.root, data);
+        return data;
+    }
+
+    DFSPreOrder() { // mid, left, right
+        if(!this.root) return [];
+
+        let data = [],
+            current = this.root;
+
+        function traversePre(node, arr) {
+            arr.push(node.val);
+            if(node.left) traversePre(node.left, arr);
+            if(node.right) traversePre(node.right, arr);
+        }
+
+        traversePre(current, data);
+        return data;
+    }
+
+    DFSPost() { // right, node, left
+        if(!this.root) return [];
+
+        let data = [],
+            current = this.root;
+
+        function traversePost(node, arr) {
+            if(node.right) traversePost(node.right, arr);
+            arr.push(node.val)
+            if(node.left) traversePost(node.left, arr);
+        }
+
+        traversePost(current, data);
+        return data;
     }
 }
 
