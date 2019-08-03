@@ -99,6 +99,24 @@ class BinarySearchTree {
         return current;
     }
 
+    BFS() {
+        if(!this.root) return [];
+        
+        let current = this.root,
+            queue = [current],
+            data = [];
+
+        while(queue.length) {
+            current = queue.shift();
+            data.push(current.val);
+            
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right);
+        }
+
+        return data;
+    }
+
     DFSInOrder() { // ascending: left, middle, right
         if(!this.root) return [];
 
@@ -139,8 +157,8 @@ class BinarySearchTree {
 
         function traversePost(node, arr) {
             if(node.right) traversePost(node.right, arr);
-            arr.push(node.val)
             if(node.left) traversePost(node.left, arr);
+            arr.push(node.val);
         }
 
         traversePost(current, data);
