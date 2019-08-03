@@ -71,6 +71,28 @@ class BinarySearchTree {
         }
         recurse(this.root);
     }
+
+    find(value) { // iterative
+        if(!this.root) return false;
+
+        let current = this.root,
+            found = false;
+
+        while(!found && current) {
+            if(value < current.val) {
+                current = current.left;
+            } else if(value > current.val) {
+                current = current.right;
+            } else {
+                found  = true;
+            }
+        }
+
+        if(!found) return false;
+
+        return current;
+
+    }
 }
 
 
